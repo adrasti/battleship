@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="./style.css">
+    <title></title>
+</head>
+<body>
+    <div class="big-container">
+        <div class="small-container">
+            <section class="game">
+                <section class="player-page">
+                    <div class="battlefield player">
+                        <div class="battlefield-gap">
+                            <div class="battlefield-placeholder">
+                                <table class="battlefield-table">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="opponent-page">
+                    <div class="battlefield opponent">
+                        <div class="battlefield-gap">
+                            <div class="battlefield-placeholder">
+                                <table class="battlefield-table">
+                                    <tbody>
+                
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script>
+        createTables = (function(){
+            const table = document.querySelector(".player tbody");
+            const table2 = document.querySelector(".opponent tbody");
+            let row, el, div, divrow, divcol, span, row2;
+            for(let i = 0; i < 10; i++){
+                row = document.createElement("tr");
+                row.classList.add("battlefield-row");
+                for(let j = 0; j < 10; j++){
+                    el = document.createElement("td");
+                    el.classList.add("cell");
+                    el.classList.add("empty");
+                    div = document.createElement("div");
+                    div.classList.add("cell-content");
+                    div.dataset.x = i;
+                    div.dataset.y = j;
+                    span = document.createElement("span");
+                    span.classList.add("z");
+                    if(j==0){
+                        divrow = document.createElement("div");
+                        divrow.classList.add("marker");
+                        divrow.classList.add("marker_row");
+                        divrow.innerText = i + 1;
+                        div.appendChild(divrow);
+                    }
+                    if(i==0){
+                        divcol = document.createElement("div");
+                        divcol.classList.add("marker");
+                        divcol.classList.add("marker_column");
+                        divcol.innerText = String.fromCharCode(65 + j);
+                        div.appendChild(divcol);
+                    }
+                    div.appendChild(span);
+                    el.appendChild(div);
+                    row.appendChild(el);
+                }   
+                table.appendChild(row);
+                row2 = row.cloneNode(true);
+                table2.appendChild(row2)
+            }
+        })()
+    </script>
+    <script type = "module" src="index.js"></script> 
+</body>
+</html>

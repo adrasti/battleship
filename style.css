@@ -1,0 +1,192 @@
+body, html {
+    padding: 0;
+    margin: 0;
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+* {
+    touch-action: manipulation;
+  }
+
+.big-container{
+    min-height: 100vh;
+}
+
+.small-container{
+    width: 100%;
+    max-width: 153.85vh;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.player-page {
+    margin-bottom: 10vh;
+}
+
+
+@media (min-width: 768px){
+    .small-container{
+        width: 750px;
+    }
+}
+
+@media(min-width: 992px){
+    .game {
+        display: table;
+        width: 100%;
+    }
+    .small-container{
+        width: 970px;
+    }
+    .player-page{
+        width: 50%;
+        float: left;
+    }
+    .opponent-page{
+        width: 50%;
+        float: left;
+    }
+    .battlefield-gap{
+        position: relative;
+        margin: 40px 0;
+    }
+    
+    .player .battlefield-gap {
+        margin-left: 100px;
+        float: left;
+    }
+    
+    .opponent .battlefield-gap {
+        margin-right: 100px;
+        float: right;
+    }
+    .player-page {
+        margin-bottom: 0;
+    }
+    
+}
+.battlefield-placeholder {
+    min-height: 340px;
+    min-width: 340px;
+}
+
+.battlefield-table {
+    margin: 0;
+    border-collapse: collapse;
+    cursor: default;
+    display: inline-block;
+    position: relative;
+}
+
+.cell {
+    border: 1px solid #b4b4ff;
+    padding: 0;
+}
+
+.cell-content {
+    position: relative;
+    height: 2em;
+    width: 2em;
+}
+
+.marker {
+    position: absolute;
+    font-size: 11px;
+    z-index: -1;
+}
+
+.marker_column {
+    top: -2em;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.marker_row {
+    left: -3em;
+    width: 2em;
+    text-align: right;
+    top: 1em;
+    height: 1em;
+}
+
+.ship-block{
+    z-index: 2;
+    left: 0;
+    top: 0;
+    border: 2px solid #00f;
+    background: rgba(0,0,255,.05);
+    position: absolute!important;
+    margin: -2px;
+}
+
+.opponent .empty:hover .cell-content:after {
+    border: 2px solid #40bf44;
+    background: rgba(64,191,68,.05);
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    top: 0;
+    left: 0;
+    margin: -2px;
+    content: "";
+    display: block;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.hit .cell-content .z:after,
+.hit .cell-content .z:before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	background: red;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg)
+}
+
+.missed .cell-content .z {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 4px;
+    width: 4px;
+    background: #333;
+    border-radius: 50%;
+    margin-top: -2px;
+    margin-left: -2px;
+    background-color: silver;
+}
+
+.hit .cell-content .z:before {
+    left: 50%;
+    width: 2px;
+    top: -25%;
+    height: 150%;
+    margin-top: 1px;
+}
+
+.hit .cell-content .z:after {
+    top: 50%;
+    height: 2px;
+    left: -25%;
+    width: 150%;
+    margin-left: -1px;
+}
+
+.hit .cell-content {
+    background: 0 0;
+    position: relative; 
+}
