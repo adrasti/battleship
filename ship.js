@@ -40,7 +40,11 @@ var Makefleet = function() {
       },
       switchPos: function(){
           this.horizontalPos = !this.horizontalPos;
-        },
+      },
+      reset: function(){
+        this.tiles = [];
+        this.horizontalPos = true;
+      }
      } 
   }
   }

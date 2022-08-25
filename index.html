@@ -8,6 +8,9 @@
     <title></title>
 </head>
 <body>
+    <header>
+        <h1>Battleship game</h1>
+    </header>
     <div class="big-container">
         <div class="small-container">
             <section class="game">
@@ -20,6 +23,14 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <ul class="items">
+                                <li class="random">
+                                    <span>randomize ↻</span>
+                                </li>
+                                <li class="newgame none">
+                                    <span>start a new game</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </section>
@@ -27,16 +38,23 @@
                     <div class="battlefield opponent">
                         <div class="battlefield-gap">
                             <div class="battlefield-placeholder">
-                                <table class="battlefield-table">
+                                <table class="battlefield-table noclick">
                                     <tbody>
                 
                                     </tbody>
                                 </table>
+                                <button class="play">Play</button>
                             </div>
                         </div>
                     </div>
                 </section>
             </section>
+        </div>
+    </div>
+    <div class="gameover none">
+        <div>
+            <h2>Game over, you lose</h2>
+            <button id="ok">ok</button>
         </div>
     </div>
     <script>
@@ -81,6 +99,6 @@
             }
         })()
     </script>
-    <script type = "module" src="index.js"></script> 
+    <script type ="module" src="index.js"></script> 
 </body>
 </html>

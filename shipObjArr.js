@@ -1,4 +1,6 @@
-function createShipsArr(fl){
+
+
+function createShipsArr(fl){  //creates array of ship objects, from smallest to largest in order: 1 1 1 1 2 2 2 3 3 4
     let Factory = fl.fleet();
     let arr = [];
 
@@ -10,18 +12,16 @@ function createShipsArr(fl){
     return arr
 }
 
-function init(arr){
-  arr[0].updateTiles(0, 5);
-  arr[1].updateTiles(5, 3);
-  arr[2].updateTiles(3, 8);
-  arr[3].updateTiles(7, 8);
-  arr[4].updateTiles(0, 0);
-  arr[5].updateTiles(0, 8);
-  arr[6].updateTiles(5, 6);
-  arr[7].updateTiles(3, 4);
-  arr[8].updateTiles(9, 0);
-  arr[9].switchPos();
-  arr[9].updateTiles(3, 1);
-}
+function init(arr, pos){  //initializes the objects' tiles by parsing "pos" objects provided by the callback
+    let positions = pos();
+    for(let i = 0; i < 10; i++){
+        if(!(positions[i]["horpos"])){
+            arr[i].switchPos();
+        }
+        arr[i].updateTiles(positions[i]["x"], positions[i]["y"]);
+    }
+  } 
+
 
 export {createShipsArr, init}
+

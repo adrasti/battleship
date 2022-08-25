@@ -21,23 +21,10 @@ function addShips(arr){
   }
 
 
-function addlisteners(arr, tiles){
-    document.querySelectorAll(".opponent .cell").forEach(c => {
-        c.addEventListener("click", e=>{
-            makeMove(e.target, arr, tiles);
-        })
-    })
-}
 
 
 
-
-
-
-
-
-
-  function makeMove(e, arr, bground){
+  function makeMove(e, arr, bground, respondingMove, arr1, tiles1){ //if the tile is not empty, attacks the ship, updates gui
     let x = Number(e.dataset.x);
     let y = Number(e.dataset.y);
     const parent = e.parentElement;
@@ -77,7 +64,6 @@ function addlisteners(arr, tiles){
         let s = arr[n].size;
         x = Math.floor(r / 10);
         y = r % 10;
-        console.log(x, y)
         if(arr[n].horizontalPos){
             for(let i = 0; i < s; i++){
                 for(let c of [-1, 1, 0]){
@@ -105,9 +91,47 @@ function addlisteners(arr, tiles){
         }
     }
     if(bground.count === 0){
-        console.log("end");
+        document.querySelector(".gameover").classList.remove("none");
+        const sc = document.querySelector(".gameover h2")
+          sc.style.color = "green";
+          sc.textContent = "Congratulations, you win";
+          const ide = document.getElementById("ok");
+          ide.classList.remove("okred");
+          ide.classList.add("okgreen");
+        return;
+    }
+    let t = document.querySelector(".opponent .battlefield-table");
+    if(n==10){
+      t.classList.add("noclick");
+      keepattacking(respondingMove, arr1, tiles1).then((r)=>{
+        if(r==-1){
+          document.querySelector(".gameover").classList.remove("none");
+          const sc = document.querySelector(".gameover h2")
+          sc.style.color = "red";
+          sc.textContent = "You lose, better luck next time";
+          const ide = document.getElementById("ok");
+          ide.classList.remove("okgreen");
+          ide.classList.add("okred");
+          return;
+        }
+        setTimeout(() => {
+          t.classList.remove("noclick"); 
+        }, 350);
+      }).catch(()=>{
+        keepattacking(respondingMove, arr1, tiles1);
+      })
     }
   }
 
+    
+  async function keepattacking(respondingMove, arr, tiles){
+    let k = await respondingMove(arr, tiles);
+    while(k!==10){
+      if(tiles.count == 0) return -1;
+      k = await respondingMove(arr, tiles);
+    }
+    return;
+  }
 
-  export {addShips, addlisteners}
+
+  export {addShips, makeMove}

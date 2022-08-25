@@ -3,6 +3,10 @@ body, html {
     margin: 0;
 }
 
+html {
+    font-size: 16px;
+}
+
 a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
     margin: 0;
     padding: 0;
@@ -17,7 +21,7 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
   }
 
 .big-container{
-    min-height: 100vh;
+    min-height: 80vh;
 }
 
 .small-container{
@@ -25,28 +29,55 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
     max-width: 153.85vh;
     margin-right: auto;
     margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-left: 15px;
     padding-right: 15px;
 }
 
 .player-page {
-    margin-bottom: 10vh;
+    margin-bottom: 1rem;
 }
 
+header {
+    height: 3rem;
+    width: 100vw;
+    margin-bottom: 1rem;
+    margin-top: 1vh;
+}
+
+.battlefield-placeholder {
+    min-height: 340px;
+    min-width: 340px;
+    position: relative;
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+}
 
 @media (min-width: 768px){
     .small-container{
         width: 750px;
     }
+    html {
+        font-size: 18px;
+    }
 }
 
 @media(min-width: 992px){
+    html {
+        font-size: 20px;
+    }
     .game {
         display: table;
         width: 100%;
     }
     .small-container{
-        width: 970px;
+        width: 1100px;
     }
     .player-page{
         width: 50%;
@@ -73,11 +104,10 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
     .player-page {
         margin-bottom: 0;
     }
+    .battlefield-placeholder {
+        position: relative;
+    }
     
-}
-.battlefield-placeholder {
-    min-height: 340px;
-    min-width: 340px;
 }
 
 .battlefield-table {
@@ -124,7 +154,7 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
     z-index: 2;
     left: 0;
     top: 0;
-    border: 2px solid #00f;
+    border: 2px solid rgb(53, 73, 226);
     background: rgba(0,0,255,.05);
     position: absolute!important;
     margin: -2px;
@@ -149,44 +179,174 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
 .hit .cell-content .z:before {
 	content: "";
 	position: absolute;
-	z-index: -1;
-	background: red;
-	-webkit-transform: rotate(-45deg);
-	-moz-transform: rotate(-45deg);
-	-ms-transform: rotate(-45deg);
-	transform: rotate(-45deg)
+	z-index: 222;
 }
 
-.missed .cell-content .z {
+.missed .cell-content .z:after {
+    content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 4px;
-    width: 4px;
-    background: #333;
-    border-radius: 50%;
-    margin-top: -2px;
-    margin-left: -2px;
-    background-color: silver;
+    z-index: 222;
+    width: 100%;
+    height: 100%;
+    z-index: 55;
+    background-image: url("./assets/waves.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: invert(81%) sepia(45%) saturate(619%) hue-rotate(112deg) brightness(91%) contrast(91%);
 }
 
-.hit .cell-content .z:before {
+.missed .cell-content {
+    background-color: lightcyan;
+    outline: solid #40e0d0 1px;
+}
+/* .hit .cell-content .z:before {
     left: 50%;
     width: 2px;
     top: -25%;
     height: 150%;
     margin-top: 1px;
 }
-
-.hit .cell-content .z:after {
+ .hit .cell-content .z:after {
     top: 50%;
     height: 2px;
     left: -25%;
     width: 150%;
     margin-left: -1px;
 }
+*/
 
+.hit .cell-content .z:after {
+    width: 100%;
+    height: 100%;
+    z-index: 55;
+    background-image: url("./assets/expl.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    outline: groove red 2px;
+    background-color: rgba(255, 166, 0, 0.255);
+}
 .hit .cell-content {
     background: 0 0;
     position: relative; 
+}
+
+.noclick {
+    pointer-events: none;
+}
+
+.items {
+    display: flex;
+    justify-content: center;
+    font-size: .8em;
+  }
+
+.random {
+    display: inline-block;
+    margin-top: 1em;
+    margin-bottom: 1em; 
+    position: relative;
+}
+
+.newgame {
+    display: inline-block;
+    margin-top: 1em;
+    margin-bottom: 1em; 
+    position: relative;
+    margin-left: 1em;
+}
+
+.random > span {
+        color: #0034ab;
+        border-bottom: 1px dotted;
+        cursor: pointer;
+}
+
+.newgame > span {
+    color: orangered;
+        border-bottom: 1px dotted;
+        cursor: pointer;
+}
+
+.play {
+    position: absolute;
+    background: rgb(93, 225, 93);
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
+    outline: solid rgb(18, 138, 38) 2px;
+    left: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    bottom: 50%;
+}
+
+
+.gameover{
+    color: green;
+    text-shadow: #40bf44;
+    font-size: 2rem;
+    background-color: rgba(135, 206, 235, 0.7);
+    position:absolute;
+    top: 0;
+    z-index: 1000;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.gameover div {
+    margin-top: 20vh;
+    background-color: rgba(135, 206, 235, 0.3);
+    padding: 0.4rem;
+    border-radius: 1rem;
+}
+
+.gameover h2{
+    margin-bottom: 1rem;
+}
+#ok {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    display:block;
+    padding: 0.2rem 1rem;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.okred:active {
+    transform:translate3d(2px, 2px, 0);
+    box-shadow: 2px 1px rgb(255, 157, 0);
+    background-color: rgb(255, 115, 0);;
+}
+
+.okred:hover{
+    background-color: rgb(255, 115, 0);;
+}
+
+.okred {
+    background-color: red;
+border: solid rgb(232, 123, 84) 2px;
+box-shadow: 4px 3px rgb(246, 109, 60);
+}
+
+.okgreen:active {
+    transform:translate3d(2px, 2px, 0);
+    box-shadow: 2px 1px rgb(162, 249, 146);
+    background-color: rgb(34, 255, 0);;
+}
+
+.okgreen:hover{
+    background-color: rgb(149, 243, 121);;
+}
+
+.okgreen {
+border: solid rgb(91, 232, 84) 2px;
+box-shadow: 2px 1px rgb(68, 121, 43);
+background-color: rgba(107, 234, 87, 0.855);;
+}
+
+.none {
+    display: none;
 }
